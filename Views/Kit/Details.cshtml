@@ -1,0 +1,37 @@
+﻿
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@Html.Label("KitName", "Kit Name:")
+<br />
+<p>@Model.KitName</p>
+
+@if (Model.Sale != null)
+{
+    @Html.Label("Sale", "Sale:")
+    <br />
+    <p>@Model.Sale.Percent</p>
+}
+@if (Model.Season != null)
+{
+    @Html.Label("Season", "Season:")
+    <br />
+    <p>@Model.Season.SeasonName</p>
+    @Html.Label("Price", "Price:")
+    <br />
+    <p>@Model.Season.Price</p>
+}
+@if (Model.Team != null)
+{
+    @Html.Label("Team", "Team:")
+    <br />
+    <p>@Model.Team.TeamName</p>
+  
+}
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.KitId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

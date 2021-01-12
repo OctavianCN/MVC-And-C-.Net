@@ -1,0 +1,39 @@
+﻿@model T_ShirtStore.Models.Player
+@{
+    ViewBag.Title = "New";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm(actionName: "New", controllerName: "Player", method: FormMethod.Post))
+{
+    @Html.Label("FirstName", "First Name:")
+    <br />
+    @Html.TextBoxFor(b => b.FirstName, null, new { placeholder = "Type in the player First name", @class = "form-control" })
+    @Html.ValidationMessageFor(b => b.FirstName, "", new { @class = "text-danger" })
+    <br />
+
+    @Html.Label("LastName", "Last Name:")
+    <br />
+    @Html.TextBoxFor(b => b.LastName, null, new { placeholder = "Type in the player Last name", @class = "form-control" })
+    @Html.ValidationMessageFor(b => b.LastName, "", new { @class = "text-danger" })
+    <br />
+
+    @Html.LabelFor(b => b.TeamsList, "Choose teams:")
+    <br />
+    for (int i = 0; i < Model.TeamsList.Count(); i++)
+    {
+        @Html.HiddenFor(b => b.TeamsList[i].Id)
+        @Html.HiddenFor(b => b.TeamsList[i].Name)
+        @Html.CheckBoxFor(b => b.TeamsList[i].Checked)
+        @Html.DisplayFor(b => b.TeamsList[i].Name)
+        <br />
+    }
+
+    <br />
+    <button class="btn btn-primary" type="submit">Create</button>
+}
+
+<p>
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,26 @@
+﻿
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@Html.Label("TeamName", "Team Name:")
+<br />
+<p>@Model.TeamName</p>
+
+@if (Model.Players.Count > 0)
+{
+    @Html.Label("Players", "Players:")
+    <br />
+    <ul>
+        @foreach (var player in Model.Players)
+        {
+            <li>@(player.FirstName + ' ' + player.LastName)</li>
+        }
+    </ul>
+}
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.TeamId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

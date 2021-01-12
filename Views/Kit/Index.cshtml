@@ -1,0 +1,39 @@
+﻿
+@{
+    ViewBag.Title = "Fotball Kits";
+}
+
+<div class="container text-center">
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <h2>@ViewBag.Title</h2>
+
+            @if (ViewBag.Kits != null)
+            {
+                <div class="card">
+                    <div class="card-body">
+                        @foreach (var kit in ViewBag.Kits)
+                        {
+                            <p class="ml-2">@kit.KitName</p>
+                            using (Html.BeginForm(actionName: "Details", controllerName: "Kit", method: FormMethod.Get, routeValues: new { id = kit.KitId },htmlAttributes: new {@class="mb-2"}))
+                            {
+                                <button class="btn btn-info mb-2"  type="submit">Summary</button>
+                            }
+
+                            using (Html.BeginForm(actionName: "Edit", controllerName: "Kit", method: FormMethod.Get, routeValues: new { id = kit.KitId }, htmlAttributes: new { @class = "mb-2" }))
+                            {
+                                <button  class="btn btn-info mb-2" type="submit">Edit</button>
+                            }
+                            using (Html.BeginForm(actionName: "Delete", controllerName: "Kit", method: FormMethod.Post, routeValues: new { id = kit.KitId }, htmlAttributes: new { @class = "mb-2" }))
+                            {
+                                <button  class="btn btn-info mb-2" type="submit">Delete</button>
+                            }
+                        }
+                        
+                        @Html.ActionLink("Add new kit", "New", null, new {@class="btn btn-primary btn-block"})
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>

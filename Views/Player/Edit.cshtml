@@ -1,0 +1,36 @@
+﻿@model T_ShirtStore.Models.Player
+
+@{
+    ViewBag.Title = "Update";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm(actionName: "Edit", controllerName: "Player"))
+{
+    @Html.Label("FirstName", "First Name:")
+    <br />
+    @Html.EditorFor(b => b.FirstName, new { htmlAttributes = new { @class = "form-control" } })
+    @Html.ValidationMessageFor(b => b.FirstName, "", new { @class = "text-danger" })
+    <br />
+    @Html.Label("LastName", "Last Name:")
+    <br />
+    @Html.EditorFor(b => b.LastName, new { htmlAttributes = new { @class = "form-control" } })
+    @Html.ValidationMessageFor(b => b.LastName, "", new { @class = "text-danger" })
+    <br />
+    @Html.LabelFor(b => b.TeamsList, "Choose team:")
+    <br />
+    for (int i = 0; i < Model.TeamsList.Count(); i++)
+    {
+        @Html.HiddenFor(b => b.TeamsList[i].Id)
+        @Html.HiddenFor(b => b.TeamsList[i].Name)
+        @Html.CheckBoxFor(b => b.TeamsList[i].Checked)
+        @Html.DisplayFor(b => b.TeamsList[i].Name)
+        <br />
+    }
+    <br />
+    <button class="btn btn-primary" type="submit">Update</button>
+}
+<p>
+    @Html.ActionLink("Back to List", "Index")
+</p>

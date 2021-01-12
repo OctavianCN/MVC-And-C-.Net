@@ -1,0 +1,45 @@
+﻿
+@{
+    ViewBag.Title = "Teams";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<table class="table">
+    <thead>
+    <th>Team Name</th>
+    </thead>
+    <tbody>
+        @foreach (var team in ViewBag.Teams)
+        {
+            <tr>
+                <td>@team.TeamName</td>
+                <td>
+                    @using (Html.BeginForm(actionName: "Details", controllerName: "Team", method: FormMethod.Get,
+                    routeValues: new { id = team.TeamId }))
+                    {
+                    <button type="submit" class="btn btn-link col-lg-3">Summary</button>
+                    }
+                </td>
+                  <td>
+                    @using (Html.BeginForm(actionName: "Edit", controllerName: "Team", method: FormMethod.Get,
+                    routeValues: new { id = team.TeamId }))
+                    {
+                    <button type="submit" class="btn btn-link col-lg-3">Edit</button>
+                    }
+                </td>
+                 <td>
+                    @using (Html.BeginForm(actionName: "Delete", controllerName: "Team", method: FormMethod.Post,
+                    routeValues: new { id = team.TeamId }))
+                    {
+                    <button type="submit" class="btn btn-link col-lg-3">Delete</button>
+                    }
+                </td>
+            </tr>
+           
+        }
+    </tbody>
+</table>
+<br />
+
+@Html.ActionLink("Add new team", "New")

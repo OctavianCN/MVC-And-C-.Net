@@ -1,0 +1,43 @@
+﻿
+@{
+    ViewBag.Title = "Sales";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<table class="table">
+    <thead>
+    <th>Sale Id</th>
+    <th>Percent</th>
+    </thead>
+    <tbody>
+        @foreach (var sale in ViewBag.Sales)
+        {
+            <tr>
+                <td>@sale.SaleId</td>
+                <td>@sale.Percent</td>
+                <td>
+                    @using (Html.BeginForm(actionName: "Details", controllerName: "Sale", method: FormMethod.Get,
+                  routeValues: new { id = sale.SaleId }))
+                    {
+                    <button type="submit" class="btn btn-link col-lg-3">Summary</button>
+                    }
+                    @using (Html.BeginForm(actionName: "Edit", controllerName: "Sale", method: FormMethod.Get,
+                      routeValues: new { id = sale.SaleId }))
+                    {
+                        <button type="submit" class="btn btn-link col-lg-3">Update</button>
+                    }
+                    @using (Html.BeginForm(actionName: "Delete", controllerName: "Sale", method: FormMethod.Post,
+                      routeValues: new { id = sale.SaleId }))
+                    {
+                        @Html.HttpMethodOverride(HttpVerbs.Delete)
+                        <button type="submit" class="btn btn-link col-lg-3">Remove</button>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<br />
+
+@Html.ActionLink("Add sale cupon", "New")

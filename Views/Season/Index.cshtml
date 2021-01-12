@@ -1,0 +1,44 @@
+﻿@{
+    ViewBag.Title = "Seasons";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<table class="table">
+    <thead>
+    <th>Season Id</th>
+    <th>Season Name</th>
+    <th>Price</th>
+    </thead>
+    <tbody>
+        @foreach (var season in ViewBag.Seasons)
+        {
+            <tr>
+                <td>@season.SeasonId</td>
+                <td>@season.SeasonName</td>
+                <td>@season.Price</td>
+                <td>
+                    @using (Html.BeginForm(actionName: "Details", controllerName: "Season", method: FormMethod.Get,
+                 routeValues: new { id = season.SeasonId }))
+                    {
+                        <button type="submit" class="btn btn-link col-lg-3">Summary</button>
+                    }
+                    @using (Html.BeginForm(actionName: "Edit", controllerName: "Season", method: FormMethod.Get,
+                     routeValues: new { id = season.SeasonId }))
+                    {
+                        <button type="submit" class="btn btn-link col-lg-3">Update</button>
+                    }
+                    @using (Html.BeginForm(actionName: "Delete", controllerName: "Season", method: FormMethod.Post,
+                      routeValues: new { id = season.SeasonId }))
+                    {
+                        @Html.HttpMethodOverride(HttpVerbs.Delete)
+                        <button type="submit" class="btn btn-link col-lg-3">Remove</button>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<br />
+
+@Html.ActionLink("Add new season", "New")

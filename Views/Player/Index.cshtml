@@ -1,0 +1,48 @@
+﻿
+
+@{
+    ViewBag.Title = "Players";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<table class="table">
+    <thead>
+    <th>First Name</th>
+    <th>Last Name</th>
+    </thead>
+    <tbody>
+        @foreach (var player in ViewBag.Players)
+        {
+            <tr>
+                <td>@player.FirstName</td>
+                <td>@player.LastName</td>
+                <td>
+                    @using (Html.BeginForm(actionName: "Details", controllerName: "Player", method: FormMethod.Get,
+                    routeValues: new { id = player.PlayerId }))
+                    {
+                    <button type="submit" class="btn btn-link col-lg-3">Summary</button>
+                    }
+                </td>
+                   <td>
+                    @using (Html.BeginForm(actionName: "Edit", controllerName: "Player", method: FormMethod.Get,
+                    routeValues: new { id = player.PlayerId }))
+                    {
+                    <button type="submit" class="btn btn-link col-lg-3">Edit</button>
+                    }
+                </td>
+                <td>
+                    @using (Html.BeginForm(actionName: "Delete", controllerName: "Player", method: FormMethod.Post,
+                    routeValues: new { id = player.PlayerId }))
+                    {
+                    <button type="submit" class="btn btn-link col-lg-3">Delete</button>
+                    }
+                </td>
+            </tr>
+            
+        }
+    </tbody>
+</table>
+<br />
+
+@Html.ActionLink("Add new player", "New")
